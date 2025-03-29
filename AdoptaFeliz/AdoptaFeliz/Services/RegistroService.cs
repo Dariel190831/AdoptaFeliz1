@@ -30,7 +30,7 @@ namespace AdoptaFeliz.Services
         public async Task<Registro> CrearRegistro(Registro registro)
         {
             registro.Id = Guid.NewGuid();
-
+            registro.CreatedAt = DateTime.UtcNow;
 
             _context.registro.Add(registro);
             await _context.SaveChangesAsync();

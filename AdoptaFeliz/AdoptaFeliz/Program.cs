@@ -10,6 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("SupabaseDB")));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithExposedHeaders("Content-Type").WithOrigins("http://localhost:8081"));
+
+});
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
